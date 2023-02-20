@@ -37,11 +37,24 @@ module.exports = {
       }
     );
   },
-  deleteNote: async (parent, { id }, { models }) => {
+  deleteNote: async (parent, { id }, { models, user }) => {
+    // if there is no user on the context, throw an authentication error
+    if (!user) {
+      throw new AuthenticationError('You must be signed in to delete a note');
+    }
+    // find the note
+    const note = await models.Note.findById(id);
+    // if the note owner and current user don't match, throw a forbidden error
+    if (note && String(note.author) !== user.id) {
+      throw new ForbiddenError("You don't have permissions to delete the note");
+    }
+
     try {
-      await models.Note.findOneAndRemove({ _id: id });
+      // if everything checks out, remove the note
+      await note.remove();
       return true;
     } catch (err) {
+      // if there's an error along the way, return false
       return false;
     }
   },
