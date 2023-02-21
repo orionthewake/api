@@ -63,6 +63,3 @@ app.listen(port, () => {
     `GraphQL server running at http://localhost:${port}${server.graphqlPath}`
   );
 });
-
-// Export the Express API
-module.exports = app;
