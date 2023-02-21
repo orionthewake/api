@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "API code examples for JavaScript Everywhere by Adam Scott, published by O'Reilly Media",
   "main": "src/index.js",
+  "engines": {
+    "node": "16.19.0"
+  },
   "scripts": {
     "start": "nodemon src/index.js",
     "dev": "nodemon src/index.js",
