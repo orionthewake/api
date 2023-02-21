@@ -6,7 +6,6 @@ const helmet = require('helmet');
 const cors = require('cors');
 const depthLimit = require('graphql-depth-limit');
 const { createComplexityLimitRule } = require('graphql-validation-complexity');
-
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
@@ -64,3 +63,6 @@ app.listen(port, () => {
     `GraphQL server running at http://localhost:${port}${server.graphqlPath}`
   );
 });
+
+// Export the Express API
+module.exports = app;
