@@ -6,7 +6,10 @@ const helmet = require('helmet');
 const cors = require('cors');
 const depthLimit = require('graphql-depth-limit');
 const { createComplexityLimitRule } = require('graphql-validation-complexity');
-require('dotenv').config();
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 
 // Local module imports
 const db = require('./db');

@@ -5,7 +5,9 @@ const {
   AuthenticationError,
   ForbiddenError,
 } = require('apollo-server-express');
-require('dotenv').config();
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 
 const gravatar = require('../util/gravatar');
 
