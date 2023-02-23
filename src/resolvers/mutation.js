@@ -95,18 +95,16 @@ module.exports = {
       throw new Error('Error creating account');
     }
   },
-  signIn: async (parent, { username, email, password }, { models }) => {
+  signIn: async (parent, { email, password }, { models }) => {
     if (email) {
       // normalize email address
       email = email.trim().toLowerCase();
     }
 
-    const user = await models.User.findOne({
-      $or: [{ email }, { username }],
-    });
+    const user = await models.User.findOne({ email });
 
     // if no user is found, throw an authentication error
-    if (!user || !user.username || !user.email) {
+    if (!user || !user.email) {
       throw new AuthenticationError('Error signing in');
     }
 
